@@ -1,0 +1,145 @@
+import 'package:flutter/material.dart';
+import 'homework/homework_list_page.dart';
+import '../interactive_learning/interactive_tools_page.dart';
+import '../performance_tracking/performance_page.dart';
+
+class StudentHomePage extends StatefulWidget {
+  const StudentHomePage({super.key});
+
+  @override
+  _StudentHomePageState createState() => _StudentHomePageState();
+}
+
+class _StudentHomePageState extends State<StudentHomePage> {
+  int _selectedIndex = 0;
+
+  static const List<Widget> _pages = <Widget>[
+    HomeworkListPage(),
+    CompletedHomeworkPage(),
+    ProfilePage(),
+    SettingsPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Student Home'),
+        backgroundColor: Colors.amber,
+      ),
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_circle),
+            label: 'Completed Homework',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class CompletedHomeworkPage extends StatelessWidget {
+  const CompletedHomeworkPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Completed Homework'),
+        backgroundColor: Colors.amber,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('Completed Homework Page'),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate to review answers page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ReviewAnswersPage()),
+                );
+              },
+              child: const Text('Review Answers'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile'),
+        backgroundColor: Colors.amber,
+      ),
+      body: const Center(
+        child: Text('Profile Page'),
+      ),
+    );
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+        backgroundColor: Colors.amber,
+      ),
+      body: const Center(
+        child: Text('Settings Page'),
+      ),
+    );
+  }
+}
+
+class ReviewAnswersPage extends StatelessWidget {
+  const ReviewAnswersPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Review Answers'),
+        backgroundColor: Colors.amber,
+      ),
+      body: const Center(
+        child: Text('Review Answers and Teacher Comments'),
+      ),
+    );
+  }
+}
